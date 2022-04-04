@@ -1,0 +1,51 @@
+body {
+  border: solid 2px black;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: orange;
+  text-align: center;
+}
+.headerElements {
+  display: flex;
+  justify-content: center;
+  width: 33%;
+  border: solid 2px red;
+}
+.menuLinks {
+  display: flex;
+  justify-content: center;
+  width: 33%;
+  border: solid 2px red;
+}
+.homePicture {
+  text-align: start;
+  width: 33%;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.galerie {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+}
+.galerieItem {
+    width: 33%;
+    height: 33%;
+}
+.image {
+    width :400px;
+}
+
+footer {
+  text-align: center;
+  background-color: darkgreen;
+}

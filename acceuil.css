@@ -1,0 +1,68 @@
+body {
+  border: solid 2px black;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: orange;
+  text-align: center;
+}
+.headerElements {
+  display: flex;
+  justify-content: center;
+  width: 33%;
+  border: solid 2px red;
+}
+.menuLinks {
+  display: flex;
+  justify-content: center;
+  width: 33%;
+  border: solid 2px red;
+}
+.homePicture {
+  text-align: start;
+  width: 33%;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.carrousel {
+  background-color: aquamarine;
+}
+.form {
+  display: flex;
+  justify-content: start;
+}
+.labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: blueviolet;
+}
+.submit {
+  display: flex;
+  align-items: flex-end;
+}
+.posts {
+  display: flex;
+  justify-content: center;
+  background-color: gold;
+  width: 100%;
+  border: solid 2px black;
+  flex-direction: column;
+}
+.post {
+    text-align: center;
+    width: 100%;
+    margin: 20px;
+    background-color:maroon;
+}
+footer {
+  text-align: center;
+  background-color: darkgreen;
+}
