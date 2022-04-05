@@ -1,5 +1,7 @@
 body {
   border: solid 2px black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0px;
 }
 header {
   display: flex;
@@ -35,6 +37,7 @@ main {
   background-color: aquamarine;
 }
 .form {
+  margin: 10px;
   display: flex;
   justify-content: start;
 }
@@ -62,6 +65,15 @@ main {
     margin: 20px;
     background-color:maroon;
 }
+.image {
+  width:1000px;
+}
+@media all and (max-width: 1024px){
+  .image {
+     width: 400px;
+  }
+}
+
 footer {
   text-align: center;
   background-color: darkgreen;
