@@ -2,6 +2,7 @@ body {
   border: solid 2px black;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   margin: 0px;
+  text-align: center;
 }
 header {
   display: flex;
