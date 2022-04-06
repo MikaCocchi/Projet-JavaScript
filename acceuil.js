@@ -1,5 +1,6 @@
-$(document).ready(function () {
-    function apiFeed() {
+function apiFeed() {
+    $(document).ready(function () {
+
         $.ajax({
             //L'URL de la requête 
             url: "https://api.spaceflightnewsapi.net/v3/articles",
@@ -34,11 +35,9 @@ $(document).ready(function () {
                 $(".posts h3").delay(3000).fadeOut('slow');
                 $(".posts h3").delay(3000).remove();
             })
-    }
-    //////////////CALL FUCTIONS/////////////////
-    apiFeed();
-});
 
+    });
+}
 
 ////////////FUNCTIONS/////////////////
 function populateFeed(response) {
@@ -51,5 +50,4 @@ function populateFeed(response) {
         $('.posts .post:last p').append(response[i].summary);
     }
 }
-
 
