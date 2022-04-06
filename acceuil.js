@@ -1,3 +1,18 @@
+(document).ready(function () {
+    $('.jcarousel').jcarousel({
+        animation: 'slow'
+    });
+    
+    $('.jcarousel').jcarousel({
+        animation: {
+            duration: 800,
+            easing:   'linear',
+            complete: function() {
+            }
+        }
+    });
+})
+
 function apiFeed() {
     $(document).ready(function () {
 

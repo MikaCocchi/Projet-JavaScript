@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="acceuil.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
     <title>Projet JavaScript</title>
 </head>
 
@@ -29,9 +31,12 @@
     </header>
     <!--------MAIN---------->
     <main>
-        <div class="carrousel">
-            <!--Carrousel-->
-            <h1>mon beau Carrousel</h1>
+        <div class="fotorama " data-loop="true">
+            <img src="https://s.fotorama.io/1.jpg">
+            <img src="https://s.fotorama.io/2.jpg">
+            <img src="https://s.fotorama.io/3.jpg">
+            <img src="https://s.fotorama.io/4.jpg">
+            <img src="https://s.fotorama.io/5.jpg">
         </div>
         <div>
             <form action="POST" class="form">
@@ -45,9 +50,9 @@
                 </div>
             </form>
         </div>
-        
+
         <div class="posts">
-            <button onclick="apiFeed()" class="update">actualiser</button>    
+            <button onclick="apiFeed()" class="update">actualiser</button>
             <!--<div class="post">
                 <h3>titre article 1</h3>
                 <img src="https://voyage-onirique.com/wp-content/uploads/2020/03/backiee-138908-landscape-1120x630.jpg"
@@ -64,7 +69,8 @@
     </main>
     <!--------FOOTER---------->
     <footer>Mon superbe Footer ^ O ^</footer>
-     <script src="acceuil.js"></script> --->
+
+    <script src="acceuil.js"></script>
     <!--<script src="acceuilNoJQuery.js"></script>--->
 </body>
 
