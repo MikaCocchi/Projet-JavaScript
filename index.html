@@ -24,9 +24,12 @@
             <h2>Titre</h2>
         </div>
         <div class="menuLinks">
-            <a href="acceuil.html">Accueil</a>
-            <a href="galerie.html">Galerie</a>
-            <a href="jeux.html">Jeux</a>
+            <button onclick="dropDown()" class="dropDownButton">Menu</button>
+            <div id="DropDownId" class="dropDownItems">
+                <a href="acceuil.html">Accueil</a>
+                <a href="galerie.html">Galerie</a>
+                <a href="jeux.html">Jeux</a>
+            </div>
         </div>
     </header>
     <!--------MAIN---------->
@@ -51,10 +54,10 @@
                 </div>
             </form>
         </div>
-        
+
         <div class="posts">
-            <button onclick="apiFeed()" class="update">actualiser</button>    
-          
+            <button onclick="apiFeed()" class="update">actualiser</button>
+
             <!--<div class="post">
                 <h3>titre article 1</h3>
                 <img src="https://voyage-onirique.com/wp-content/uploads/2020/03/backiee-138908-landscape-1120x630.jpg"
