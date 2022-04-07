@@ -1,20 +1,38 @@
-function apiFeed() {
-fetch('https://api.spaceflightnewsapi.net/v3/articles')
-    .then(response => {
-        console.log(response);
-        return response.json();
-    })
-    .then(json => {
-        populateFeed(json);
-        console.log(json)
-
-    })
-    .catch((error) => {
-        errorMessage();
-    })
+////rop down the menu
+function dropDown() {
+    document.getElementById('dropDownId').classList.add('show');
 }
 
-
+/////close the Menu if the user clicks somewhere else
+window.onclick = function (event) {
+    if (!event.target.matches('.dropDownButton')) {
+        let dropdowns = document.getElementsByClassName("dropDownItems");
+        for (let i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+let alreadyClicked = false;
+function apiFeed() {
+    if (!alreadyClicked) {
+        fetch('https://api.spaceflightnewsapi.net/v3/articles')
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                populateFeed(json);
+                alreadyClicked = true;
+            })
+            .catch((error) => {
+                errorMessage();
+            })
+    } else {
+        alreadyClickedMessage();
+    }
+}
 
 function populateFeed(response) {
     for (let i = 0; i < response.length; i++) {
@@ -41,9 +59,16 @@ function populateFeed(response) {
 }
 
 function errorMessage() {
+    let selecteur = document.querySelector('.posts')
     let errorMessage = document.createElement('h2')
-    errorMessage.innerText = "La requête a échouée °v°";
-    document.body.prepend(errorMessage);
-    console.log("il y a une erreur");
+    errorMessage.textContent = "La requête a échouée °v°";
+    selecteur.prepend(errorMessage);
     setTimeout(() => { errorMessage.remove(); }, 2000);
+}
+function alreadyClickedMessage() {
+    let selecteur = document.querySelector('.posts')
+    let alreadyClickedMessage = document.createElement('h2')
+    alreadyClickedMessage.textContent = "tu es déjà à jour petit chenapant";
+    selecteur.prepend(alreadyClickedMessage);
+    setTimeout(() => { alreadyClickedMessage.remove(); }, 2000);
 }
