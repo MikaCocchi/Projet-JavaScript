@@ -1,7 +1,18 @@
-////rop down the menu
-function dropDown() {
-    document.getElementById('dropDownId').classList.add('show');
-}
+let alreadyClicked = false;
+
+let form = document.querySelector('#newPostForm')
+let submit = document.querySelector('#submit');
+submit.addEventListener('click', function (event) {
+    event.preventDefault();
+    if (form.checkValidity()) {
+        let formInfo = createFormInfosArray();
+        makeOneArticle(formInfo);
+    }
+
+});
+
+
+
 
 /////close the Menu if the user clicks somewhere else
 window.onclick = function (event) {
@@ -15,7 +26,16 @@ window.onclick = function (event) {
         }
     }
 }
-let alreadyClicked = false;
+
+////////////////////FUNCTIONS////////////////////
+
+////rop down the menu
+function dropDown() {
+    document.getElementById('dropDownId').classList.add('show');
+}
+
+
+
 function apiFeed() {
     if (!alreadyClicked) {
         fetch('https://api.spaceflightnewsapi.net/v3/articles')
@@ -34,28 +54,33 @@ function apiFeed() {
     }
 }
 
-function populateFeed(response) {
-    for (let i = 0; i < response.length; i++) {
-        ///////////////the div which contains the post informations///////////////
-        let selecteur = document.querySelector('.posts');
-        let createDiv = document.createElement('div');
-        createDiv.classList.add("post");
-        selecteur.append(createDiv)
-        ////////create H3///////////
-        let createH3 = document.createElement('h3');
-        createH3.textContent = response[i].title;
-        createDiv.append(createH3);
-        ////////create IMG//////////
-        let createImg = document.createElement('img');
-        createImg.src = response[i].imageUrl;
-        createImg.classList.add("image");
-        createDiv.append(createImg);
-        ////////create P////////////
-        let createP = document.createElement('p');
-        createP.textContent = response[i].summary;
-        createDiv.append(createP);
-
+//CREATE ARTICLES
+function populateFeed(allArticles) {
+    for (let i = 0; i < allArticles.length; i++) {
+        makeOneArticle(allArticles[i]);
     }
+}
+
+//CREATE ONE SINGLE ARTICLE
+function makeOneArticle(article) {
+    ///////////////the div which contains the post informations///////////////
+    let selecteur = document.querySelector('.posts');
+    let createDiv = document.createElement('div');
+    createDiv.classList.add("post");
+    selecteur.append(createDiv)
+    ////////create H3///////////
+    let createH3 = document.createElement('h3');
+    createH3.textContent = article.title;
+    createDiv.append(createH3);
+    ////////create IMG//////////
+    let createImg = document.createElement('img');
+    createImg.src = article.imageUrl;
+    createImg.classList.add("image");
+    createDiv.append(createImg);
+    ////////create P////////////
+    let createP = document.createElement('p');
+    createP.textContent = article.summary;
+    createDiv.append(createP);
 }
 
 function errorMessage() {
@@ -71,4 +96,13 @@ function alreadyClickedMessage() {
     alreadyClickedMessage.textContent = "tu es déjà à jour petit chenapant";
     selecteur.prepend(alreadyClickedMessage);
     setTimeout(() => { alreadyClickedMessage.remove(); }, 2000);
+}
+
+function createFormInfosArray() {
+    let formInfos = {
+        'title': document.querySelector('#titleForm').value,
+        'imageUrl': document.querySelector('#imgForm').value,
+        'summary': document.querySelector('#contentForm').value,
+    }
+    return formInfos;
 }

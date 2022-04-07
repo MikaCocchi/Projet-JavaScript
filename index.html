@@ -45,14 +45,17 @@
             <img src="https://s.fotorama.io/5.jpg">
         </div>
         <div>
-            <form action="POST" class="form">
-                <div class="labels"><label for="content">Contenu du post</label>
-                    <input type="text" name="content">
-                    <label for="name">Votre nom</label>
-                    <input type="text" name="name">
+            <form action="" class="form" id="newPostForm" method="post">
+                <div class="labels">
+                    <label for="name">Titre du Post</label>
+                    <input type="text" name="title" id="titleForm" required>
+                    <label for="img">url de l'image</label>
+                    <input type="text" name="img" id="imgForm" required>
+                    <label for="content">Contenu du post</label>
+                    <input type="text" name="content" id="contentForm" required>
                 </div>
                 <div class="submit">
-                    <input type="submit">
+                    <input type="submit" name="submit" id="submit">
                 </div>
             </form>
         </div>
