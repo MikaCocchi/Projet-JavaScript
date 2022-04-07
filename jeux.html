@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="jeux.css">
+    <link rel="stylesheet" href="header.css">
     <title>Jeux</title>
 </head>
 <body>
@@ -17,13 +18,18 @@
             <h2>Titre</h2>
         </div>
         <div class="menuLinks">
-            <a href="acceuil.html">Accueil</a>
-            <a href="galerie.html">Galerie</a>
-            <a href="jeux.html">Jeux</a>
+            <div class="dropdown">
+                <button onclick="dropDown()" class="dropDownButton">Menu</button>
+                <div id="dropDownId" class="dropDownItems">
+                    <a href="index.html">Acceuil</a>
+                    <a href="galerie.html">Galerie</a>
+                </div>
+            </div>
         </div>
     </header>
     <footer>
         Mon superbe Footer ^ O ^
     </footer>
+    <script src="acceuilNoJQuery.js"></script>
 </body>
 </html>
