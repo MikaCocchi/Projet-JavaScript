@@ -1,8 +1,14 @@
 let alreadyClicked = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-    let form = document.querySelector('#newPostForm')
+    let form = document.querySelector('#newPostForm');
     let submit = document.querySelector('#submit');
+    let updateFeed = document.querySelector('.update');
+    let dropDownMenuButton = document.querySelector('.dropDownButton');
+
+    dropDownMenuButton.addEventListener('click', function () {
+        dropDown();
+    });
 
     submit.addEventListener('click', function (event) {
         event.preventDefault();
@@ -22,7 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-    }
+    };
+
+    updateFeed.addEventListener('click', function () {
+        apiFeed();
+    })
 });
 
 
