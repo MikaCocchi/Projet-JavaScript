@@ -38,9 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
 ////////////////////FUNCTIONS////////////////////
 
 ////rop down the menu
