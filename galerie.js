@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     let dropDownMenuButton = document.querySelector('.dropDownButton');
-    let mosaicDisplayButton = document.querySelector('#mosaicDisplayButton')
-    let columnDisplayButton = document.querySelector('#columnDisplayButton')
+    let mosaicDisplayButton = document.querySelector('#mosaicDisplayButton');
+    let columnDisplayButton = document.querySelector('#columnDisplayButton');
+    let addImgSubmit = document.querySelector('#addImgsubmit');
 
     dropDownMenuButton.addEventListener('click', function () {
         dropDown();
@@ -23,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     columnDisplayButton.addEventListener('click', function () {
         changeDisplayGallery('column', 'mosaic')
-    })
+    });
+    addImgSubmit.addEventListener('click', function (event) {
+        event.preventDefault();
+        createAddImgForm();
+    });
 });
 
 ////////////////////FUNCTIONS////////////////////
@@ -51,4 +56,11 @@ function selectedButtonDisplayChoice(displayChoise, actualDisplay) {
     let displayButtonNotPressed = document.querySelector('#' + actualDisplay + 'DisplayButton');
     displayButtonPressed.classList.add('selected');
     displayButtonNotPressed.classList.remove('selected')
+}
+
+function createAddImgForm() {
+    let form = document.querySelector('.form');
+    let numberOfImgToAdd = document.querySelector('.formSelect').value
+    console.log('COMBIEN ?! ',numberOfImgToAdd);
+
 }

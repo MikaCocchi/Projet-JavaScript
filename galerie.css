@@ -7,8 +7,12 @@ main {
   justify-content: center;
   align-items: center;
 }
+.galleryInteraction{
+  display: flex;
+  width: 100%;
+}
 #galleryDisplay {
-  width: 90%;
+  width: 50%;
   display: flex;
   justify-content: flex-start;
 }
@@ -22,6 +26,19 @@ main {
 .columnIcon {
   width: 70px;
   margin: 10px;
+}
+.form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.formSelect {
+  width: 40px;
+  height: 30px;
+  border-radius: 5px;
+}
+#addImgicon {
+  width: 60px;
 }
 .gallery {
     display: flex;

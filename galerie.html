@@ -33,13 +33,31 @@
         <div>
             <h1>Voici notre magnifique galerie de photos</h1>
         </div>
-        <div id="galleryDisplay">
-            <button id="mosaicDisplayButton" class="selected">
-                <img class="mosaicIcon" src="https://cdn-icons-png.flaticon.com/512/847/847455.png" alt="mosaic icon">
-            </button>
-            <button id="columnDisplayButton">
-                <img class="columnIcon" src="https://cdn-icons-png.flaticon.com/512/3603/3603432.png" alt="column icon">
-            </button>
+        <div class="galleryInteraction">
+            <div id="galleryDisplay">
+                <button id="mosaicDisplayButton" class="selected">
+                    <img class="mosaicIcon" src="https://cdn-icons-png.flaticon.com/512/847/847455.png"
+                        alt="mosaic icon">
+                </button>
+                <button id="columnDisplayButton">
+                    <img class="columnIcon" src="https://cdn-icons-png.flaticon.com/512/3603/3603432.png"
+                        alt="column icon">
+                </button>
+            </div>
+            <div id="addImg">
+                <form action="" method="post" class="form">
+                        <h3>Combien d'images voulez-vous ajouter ?</h3>
+                    <select name="newImgSelect" class="formSelect">
+                        <option value="">...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit" id="addImgsubmit">valider</button>
+                </form>
+            </div>
         </div>
         <div class="gallery">
             <div class="mosaicDisplayItem">
