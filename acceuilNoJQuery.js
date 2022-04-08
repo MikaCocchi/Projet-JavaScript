@@ -1,31 +1,35 @@
 let alreadyClicked = false;
 
-let form = document.querySelector('#newPostForm')
-let submit = document.querySelector('#submit');
-submit.addEventListener('click', function (event) {
-    event.preventDefault();
-    if (form.checkValidity()) {
-        let formInfo = createFormInfosArray();
-        makeOneArticle(formInfo);
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    let form = document.querySelector('#newPostForm')
+    let submit = document.querySelector('#submit');
 
+    submit.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (form.checkValidity()) {
+            let formInfo = createFormInfosArray();
+            makeOneArticle(formInfo);
+        }
+    });
+    /////close the Menu if the user clicks somewhere else
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropDownButton')) {
+            let dropdowns = document.getElementsByClassName("dropDownItems");
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
 });
 
 
 
 
-/////close the Menu if the user clicks somewhere else
-window.onclick = function (event) {
-    if (!event.target.matches('.dropDownButton')) {
-        let dropdowns = document.getElementsByClassName("dropDownItems");
-        for (let i = 0; i < dropdowns.length; i++) {
-            let openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-}
+
+
 
 ////////////////////FUNCTIONS////////////////////
 
