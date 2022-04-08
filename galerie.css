@@ -43,6 +43,35 @@ main {
 .columnDisplayImage {
   width :1000px;
 }
+@media all and (max-width: 1600px){
+  .mosaicDisplayItem {
+    width: 50%;
+}
+  .mosaicDisplayImage {
+     width: 300px;
+  }
+  .columnDisplayItem {
+    width: 100%;
+  }
+  .columnDisplayImage {
+    width :700px;
+  }  
+}
+@media all and (max-width: 800px){
+  .mosaicDisplayItem {
+    width: 50%;
+}
+  .mosaicDisplayImage {
+     width: 150px;
+  }
+  .columnDisplayItem {
+    width: 100%;
+  }
+  .columnDisplayImage {
+    width :400px;
+  }
+}
+
 footer {
   text-align: center;
   background-color: darkgreen;
