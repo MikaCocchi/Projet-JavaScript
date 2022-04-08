@@ -7,18 +7,41 @@ main {
   justify-content: center;
   align-items: center;
 }
-.galerie {
+#galleryDisplay {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+}
+.selected {
+  background-color: orange;
+}
+.mosaicIcon {
+  width: 70px;
+  margin: 10px;
+}
+.columnIcon {
+  width: 70px;
+  margin: 10px;
+}
+.gallery {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     width: 80%;
+    margin: 20px;
+    text-align: center;
 }
-.galerieItem {
+.mosaicDisplayItem {
     width: 33%;
-    height: 33%;
 }
-.image {
+.mosaicDisplayImage {
     width :400px;
+}
+.columnDisplayItem {
+  width: 100%;
+}
+.columnDisplayImage {
+  width :1000px;
 }
 footer {
   text-align: center;
