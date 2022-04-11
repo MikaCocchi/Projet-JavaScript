@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let dropDownMenuButton = document.querySelector('.dropDownButton');
     let mosaicDisplayButton = document.querySelector('#mosaicDisplayButton');
     let columnDisplayButton = document.querySelector('#columnDisplayButton');
-    let addImgSubmit = document.querySelector('#addImgsubmit');
+    let addImgSubmit = document.querySelector('#addImgFormsubmit');
 
     dropDownMenuButton.addEventListener('click', function () {
         dropDown();
@@ -25,9 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     columnDisplayButton.addEventListener('click', function () {
         changeDisplayGallery('column', 'mosaic')
     });
-    addImgSubmit.addEventListener('click', function (event) {
+    addImgFormsubmit.addEventListener('click', function (event) {
         event.preventDefault();
-        createAddImgForm();
+        let numberOfImgToAdd = document.querySelector('.formSelect').value
+        if (numberOfImgToAdd !== '') {
+            createAddImgForm(numberOfImgToAdd);
+            addImg(numberOfImgToAdd);
+        }
     });
 });
 
@@ -58,9 +62,64 @@ function selectedButtonDisplayChoice(displayChoise, actualDisplay) {
     displayButtonNotPressed.classList.remove('selected')
 }
 
-function createAddImgForm() {
-    let form = document.querySelector('.form');
-    let numberOfImgToAdd = document.querySelector('.formSelect').value
-    console.log('COMBIEN ?! ',numberOfImgToAdd);
+function createAddImgForm(numberOfImgToAdd) {
+    if (numberOfImgToAdd !== 0) {
+        let form = document.querySelector('.form');
+        console.log('COMBIEN ?! ', numberOfImgToAdd);
+        //div URL Form
+        let divURLForm = document.createElement('div');
+        divURLForm.classList.add('URLForm');
+        form.append(divURLForm)
+        //title
+        let h3Form = document.createElement('h3');
+        h3Form.textContent = 'URL d\'images';
+        divURLForm.append(h3Form);
 
+        //inputs
+        for (let i = 0; i < numberOfImgToAdd; i++) {
+            let input = document.createElement('input')
+            input.setAttribute('type', 'text')
+            input.setAttribute('id', 'input' + i)
+            input.setAttribute('placeholder', 'URL de l\'image')
+            divURLForm.append(input)
+        }
+
+        let addImgSubmit = document.createElement('button');
+        addImgSubmit.textContent = 'valider';
+        addImgSubmit.setAttribute('type', 'submit');
+        addImgSubmit.setAttribute('id', 'addImgSubmit');
+        divURLForm.append(addImgSubmit)
+    }
+}
+
+function addImg(numberOfImgToAdd) {
+    let addImgSubmit = document.querySelector('#addImgSubmit');
+
+    let galleryChild = document.querySelector('.gallery').firstElementChild;
+    actualDivDisplay = galleryChild.className;
+    let galleryImages = document.querySelector('.' + actualDivDisplay + ' img')
+    actualImgDisplay = galleryImages.className;
+
+
+    addImgSubmit.addEventListener('click', function (event) {
+        event.preventDefault();
+        gallery = document.querySelector('.gallery');
+        for (let i = 0; i < numberOfImgToAdd; i++) {
+            ////////create div//////////
+            let createDiv = document.createElement('div');
+            createDiv.classList.add(actualDivDisplay);
+            gallery.prepend(createDiv);
+            ////////create IMG//////////
+            let createImg = document.createElement('img');
+            createImg.src = document.querySelector('#input' + 0).value;
+            createImg.classList.add(actualImgDisplay);
+            createDiv.prepend(createImg);
+        }
+        deleteForm();
+    });
+
+}
+function deleteForm() {
+    let URLForm = document.querySelector('.URLForm');
+    URLForm.remove();
 }
