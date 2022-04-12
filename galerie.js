@@ -1,8 +1,10 @@
+let formAlreadyExists = false;
+let errorMessageAlreadyWritten = false;
 document.addEventListener('DOMContentLoaded', () => {
     let dropDownMenuButton = document.querySelector('.dropDownButton');
     let mosaicDisplayButton = document.querySelector('#mosaicDisplayButton');
     let columnDisplayButton = document.querySelector('#columnDisplayButton');
-    let addImgSubmit = document.querySelector('#addImgFormsubmit');
+
 
     dropDownMenuButton.addEventListener('click', function () {
         dropDown();
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     addImgFormsubmit.addEventListener('click', function (event) {
         event.preventDefault();
         let numberOfImgToAdd = document.querySelector('.formSelect').value
-        if (numberOfImgToAdd !== '') {
+        if (!formAlreadyExists && numberOfImgToAdd !== '') {
             createAddImgForm(numberOfImgToAdd);
             addImg(numberOfImgToAdd);
         }
@@ -90,6 +92,7 @@ function createAddImgForm(numberOfImgToAdd) {
         addImgSubmit.setAttribute('id', 'addImgSubmit');
         divURLForm.append(addImgSubmit)
     }
+    formAlreadyExists = true;
 }
 
 function addImg(numberOfImgToAdd) {
@@ -104,22 +107,40 @@ function addImg(numberOfImgToAdd) {
     addImgSubmit.addEventListener('click', function (event) {
         event.preventDefault();
         gallery = document.querySelector('.gallery');
-        for (let i = 0; i < numberOfImgToAdd; i++) {
-            ////////create div//////////
-            let createDiv = document.createElement('div');
-            createDiv.classList.add(actualDivDisplay);
-            gallery.prepend(createDiv);
-            ////////create IMG//////////
-            let createImg = document.createElement('img');
-            createImg.src = document.querySelector('#input' + 0).value;
-            createImg.classList.add(actualImgDisplay);
-            createDiv.prepend(createImg);
+        regexUrl = /[(http(s)?):\/\/(www\.)?\w-/=#%&\.\?]{2,}\.[a-z]{2,}([\w-/=#%&\.\?]*)/gi;
+        for (let j = 0; j < numberOfImgToAdd; j++) {
+            urlInput = document.querySelector('#input' + j).value;
+            if (regexUrl.test(urlInput)) {
+                for (let i = 0; i < numberOfImgToAdd; i++) {
+                    erreur = false;
+                    ////////create div//////////
+                    let createDiv = document.createElement('div');
+                    createDiv.classList.add(actualDivDisplay);
+                    gallery.prepend(createDiv);
+                    ////////create IMG//////////
+                    let createImg = document.createElement('img');
+                    createImg.src = document.querySelector('#input' + i).value;
+                    createImg.classList.add(actualImgDisplay);
+                    createDiv.prepend(createImg);
+                }
+                deleteForm();
+                formAlreadyExists = false;
+            } else if (!errorMessageAlreadyWritten) {
+                errorMessageAlreadyWritten = true;
+                errorMessagePlace = document.querySelector('#addImg');
+                createErrorMessage(errorMessagePlace, 'mauvaise Url / champs non renseignés');
+            }
         }
-        deleteForm();
     });
-
 }
 function deleteForm() {
     let URLForm = document.querySelector('.URLForm');
     URLForm.remove();
+}
+// parameters are the selector wich concerns the place of the error message and the message you want to display
+function createErrorMessage(errorMessagePlace , errorMessage) {
+    let errorMessageTag = document.createElement('h2')
+    errorMessageTag.textContent = errorMessage;
+    errorMessagePlace.append(errorMessageTag);
+    setTimeout(() => { errorMessageTag.remove(); errorMessageAlreadyWritten = false; }, 2000);
 }
