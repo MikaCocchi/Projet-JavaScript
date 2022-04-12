@@ -1,7 +1,10 @@
+let formAlreadyExists = false;
+let errorMessageAlreadyWritten = false;
 document.addEventListener('DOMContentLoaded', () => {
     let dropDownMenuButton = document.querySelector('.dropDownButton');
-    let mosaicDisplayButton = document.querySelector('#mosaicDisplayButton')
-    let columnDisplayButton = document.querySelector('#columnDisplayButton')
+    let mosaicDisplayButton = document.querySelector('#mosaicDisplayButton');
+    let columnDisplayButton = document.querySelector('#columnDisplayButton');
+
 
     dropDownMenuButton.addEventListener('click', function () {
         dropDown();
@@ -23,7 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     columnDisplayButton.addEventListener('click', function () {
         changeDisplayGallery('column', 'mosaic')
-    })
+    });
+    addImgFormsubmit.addEventListener('click', function (event) {
+        event.preventDefault();
+        let numberOfImgToAdd = document.querySelector('.formSelect').value
+        if (!formAlreadyExists && numberOfImgToAdd !== '') {
+            createAddImgForm(numberOfImgToAdd);
+            addImg(numberOfImgToAdd);
+        }
+    });
 });
 
 ////////////////////FUNCTIONS////////////////////
@@ -51,4 +62,85 @@ function selectedButtonDisplayChoice(displayChoise, actualDisplay) {
     let displayButtonNotPressed = document.querySelector('#' + actualDisplay + 'DisplayButton');
     displayButtonPressed.classList.add('selected');
     displayButtonNotPressed.classList.remove('selected')
+}
+
+function createAddImgForm(numberOfImgToAdd) {
+    if (numberOfImgToAdd !== 0) {
+        let form = document.querySelector('.form');
+        console.log('COMBIEN ?! ', numberOfImgToAdd);
+        //div URL Form
+        let divURLForm = document.createElement('div');
+        divURLForm.classList.add('URLForm');
+        form.append(divURLForm)
+        //title
+        let h3Form = document.createElement('h3');
+        h3Form.textContent = 'URL d\'images';
+        divURLForm.append(h3Form);
+
+        //inputs
+        for (let i = 0; i < numberOfImgToAdd; i++) {
+            let input = document.createElement('input')
+            input.setAttribute('type', 'text')
+            input.setAttribute('id', 'input' + i)
+            input.setAttribute('placeholder', 'URL de l\'image')
+            divURLForm.append(input)
+        }
+
+        let addImgSubmit = document.createElement('button');
+        addImgSubmit.textContent = 'valider';
+        addImgSubmit.setAttribute('type', 'submit');
+        addImgSubmit.setAttribute('id', 'addImgSubmit');
+        divURLForm.append(addImgSubmit)
+    }
+    formAlreadyExists = true;
+}
+
+function addImg(numberOfImgToAdd) {
+    let addImgSubmit = document.querySelector('#addImgSubmit');
+
+    let galleryChild = document.querySelector('.gallery').firstElementChild;
+    actualDivDisplay = galleryChild.className;
+    let galleryImages = document.querySelector('.' + actualDivDisplay + ' img')
+    actualImgDisplay = galleryImages.className;
+
+
+    addImgSubmit.addEventListener('click', function (event) {
+        event.preventDefault();
+        gallery = document.querySelector('.gallery');
+        regexUrl = /[(http(s)?):\/\/(www\.)?\w-/=#%&\.\?]{2,}\.[a-z]{2,}([\w-/=#%&\.\?]*)/gi;
+        for (let j = 0; j < numberOfImgToAdd; j++) {
+            urlInput = document.querySelector('#input' + j).value;
+            if (regexUrl.test(urlInput)) {
+                for (let i = 0; i < numberOfImgToAdd; i++) {
+                    erreur = false;
+                    ////////create div//////////
+                    let createDiv = document.createElement('div');
+                    createDiv.classList.add(actualDivDisplay);
+                    gallery.prepend(createDiv);
+                    ////////create IMG//////////
+                    let createImg = document.createElement('img');
+                    createImg.src = document.querySelector('#input' + i).value;
+                    createImg.classList.add(actualImgDisplay);
+                    createDiv.prepend(createImg);
+                }
+                deleteForm();
+                formAlreadyExists = false;
+            } else if (!errorMessageAlreadyWritten) {
+                errorMessageAlreadyWritten = true;
+                errorMessagePlace = document.querySelector('#addImg');
+                createErrorMessage(errorMessagePlace, 'mauvaise Url / champs non renseignés');
+            }
+        }
+    });
+}
+function deleteForm() {
+    let URLForm = document.querySelector('.URLForm');
+    URLForm.remove();
+}
+// parameters are the selector wich concerns the place of the error message and the message you want to display
+function createErrorMessage(errorMessagePlace , errorMessage) {
+    let errorMessageTag = document.createElement('h2')
+    errorMessageTag.textContent = errorMessage;
+    errorMessagePlace.append(errorMessageTag);
+    setTimeout(() => { errorMessageTag.remove(); errorMessageAlreadyWritten = false; }, 2000);
 }
