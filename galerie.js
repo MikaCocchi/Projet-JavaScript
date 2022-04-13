@@ -106,30 +106,33 @@ function addImg(numberOfImgToAdd) {
 
     addImgSubmit.addEventListener('click', function (event) {
         event.preventDefault();
-        gallery = document.querySelector('.gallery');
-        regexUrl = /[(http(s)?):\/\/(www\.)?\w-/=#%&\.\?]{2,}\.[a-z]{2,}([\w-/=#%&\.\?]*)/gi;
-        for (let j = 0; j < numberOfImgToAdd; j++) {
-            urlInput = document.querySelector('#input' + j).value;
-            if (regexUrl.test(urlInput)) {
-                for (let i = 0; i < numberOfImgToAdd; i++) {
-                    erreur = false;
-                    ////////create div//////////
-                    let createDiv = document.createElement('div');
-                    createDiv.classList.add(actualDivDisplay);
-                    gallery.prepend(createDiv);
-                    ////////create IMG//////////
-                    let createImg = document.createElement('img');
-                    createImg.src = document.querySelector('#input' + i).value;
-                    createImg.classList.add(actualImgDisplay);
-                    createDiv.prepend(createImg);
-                }
-                deleteForm();
-                formAlreadyExists = false;
-            } else if (!errorMessageAlreadyWritten) {
-                errorMessageAlreadyWritten = true;
+        let gallery = document.querySelector('.gallery');
+        let formIsCorrect = true;
+        
+        for (let i = 0; i < numberOfImgToAdd; i++) {
+            regexUrl = /[(http(s)?):\/\/(www\.)?\w-/=#%&\.\?]{2,}\.[a-z]{2,}([\w-/=#%&\.\?]*)/gi;
+            let urlInput = document.querySelector('#input' + i).value;
+            if (!regexUrl.test(urlInput)) {
+                formIsCorrect = false;
                 errorMessagePlace = document.querySelector('#addImg');
                 createErrorMessage(errorMessagePlace, 'mauvaise Url / champs non renseignés');
+                break;
             }
+        }
+        if(formIsCorrect){
+            for (let i = 0; i < numberOfImgToAdd; i++) {
+                ////////create div//////////
+                let createDiv = document.createElement('div');
+                createDiv.classList.add(actualDivDisplay);
+                gallery.prepend(createDiv);
+                ////////create IMG//////////
+                let createImg = document.createElement('img');
+                createImg.src = document.querySelector('#input' + i).value;
+                createImg.classList.add(actualImgDisplay);
+                createDiv.prepend(createImg);
+            }
+            deleteForm();
+            formAlreadyExists = false;
         }
     });
 }
@@ -138,7 +141,7 @@ function deleteForm() {
     URLForm.remove();
 }
 // parameters are the selector wich concerns the place of the error message and the message you want to display
-function createErrorMessage(errorMessagePlace , errorMessage) {
+function createErrorMessage(errorMessagePlace, errorMessage) {
     let errorMessageTag = document.createElement('h2')
     errorMessageTag.textContent = errorMessage;
     errorMessagePlace.append(errorMessageTag);
