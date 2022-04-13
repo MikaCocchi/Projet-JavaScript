@@ -14,3 +14,27 @@ body {
     text-align: center;
     background-color: darkgreen;
   }
+  /* MEMORY */
+  #memoryGame {
+    display: flex;
+    flex-wrap: wrap;
+    width: 880px;
+  }
+  .cardContainer {
+    margin: 10px;
+  }
+  .cardFront {
+    width: 200px;
+    height: 200px;
+    display: none;
+  }
+  .cardBack {
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
